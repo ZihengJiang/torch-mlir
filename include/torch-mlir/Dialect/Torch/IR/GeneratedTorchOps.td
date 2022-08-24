@@ -4464,10 +4464,10 @@ def Torch_AtenFrobeniusNormDimOp : Torch_Op<"aten.frobenius_norm.dim", [
     HasValueSemantics,
     ReadOnly
   ]> {
-  let summary = "Generated op for `aten::frobenius_norm.dim : (Tensor, int[], bool) -> (Tensor)`";
+  let summary = "Generated op for `aten::frobenius_norm.dim : (Tensor, int[]?, bool) -> (Tensor)`";
   let arguments = (ins
     AnyTorchTensorType:$self,
-    AnyTorchListOfTorchIntType:$dim,
+    AnyTorchOptionalListOfTorchIntType:$dim,
     Torch_BoolType:$keepdim
   );
   let results = (outs
