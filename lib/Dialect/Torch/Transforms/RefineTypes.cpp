@@ -1106,6 +1106,13 @@ void TypeAnalysis::visitOperation(Operation *op,
     return;
   }
 
+  if (auto frobeniusNormDim = dyn_cast<AtenFrobeniusNormDimOp>(op)) {
+    Type dtype = operands[0]->getValue().dtype;
+    visitReductionAlongDimIntListOp(frobeniusNormDim, frobeniusNormDim.dim(),
+                                    frobeniusNormDim.keepdim(), dtype, operands);
+    return;
+  }
+
   // Otherwise, this is an unknown operation. Just mark all results as
   // having reached a pessimistic fixpoint.
   markAllPessimisticFixpoint(results);
